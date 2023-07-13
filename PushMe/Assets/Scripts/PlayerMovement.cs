@@ -23,6 +23,10 @@ public  void Start()
     force = 12 ;
     _ispaused = false ;
     timeLeft = 60;
+    enemiesScore = PlayerPrefs.GetInt("enemieskor");
+    playerscore = PlayerPrefs.GetInt("playerskor");
+    _playerskor.text = PlayerPrefs.GetInt("playerskor").ToString();
+   _enemiesSkor.text = PlayerPrefs.GetInt("enemieskor").ToString();
 }
     public void FixedUpdate()
     {
@@ -53,7 +57,8 @@ void OnCollisionEnter(Collision ot)
          if(ot.gameObject.tag == "zeropoint")
         {
             enemiesScore++;
-            _enemiesSkor.text = enemiesScore.ToString();
+             PlayerPrefs.SetInt("enemieskor", enemiesScore);
+            _enemiesSkor.text = PlayerPrefs.GetInt("enemieskor").ToString();
             Application.LoadLevel(Application.loadedLevel);
             this.gameObject.SetActive(false);
         }
@@ -68,7 +73,9 @@ void OnCollisionEnter(Collision ot)
            {
             _ispaused = true ;
             playerscore ++ ;
-            _playerskor.text = _playerskor.ToString();
+            PlayerPrefs.SetInt("playerskor",playerscore);
+            _playerskor.text = PlayerPrefs.GetInt("playerskor").ToString();
+            
             //Application.LoadLevel(0);
              Application.LoadLevel(Application.loadedLevel);
            }
